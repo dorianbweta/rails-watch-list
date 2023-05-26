@@ -1,0 +1,11 @@
+<h1> <%= @list.name %></h1>
+
+<div id="list">
+  <ul>
+    <li>
+    <%= @list.name %>
+    <%# <%= link_to "Delete", bookmark_path(@bookmark),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> %>
+    </li>
+    <p><%= link_to "See all lists", lists_path, class: "btn btn-flat" %></p>
+  </ul>
+</div>
