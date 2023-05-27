@@ -9,7 +9,12 @@ class ListsController < ApplicationController
 
   def create
     @list = List.create(list_params)
-    redirect_to list_path(@list)
+    if @list.save
+      redirect_to list_path(@list)
+    else
+      # No redirect here as it refreshes the page + loses the info
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show

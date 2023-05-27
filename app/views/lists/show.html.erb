@@ -1,11 +1,43 @@
-<h1> <%= @list.name %></h1>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80)">
+  <div class="container">
+    <div>
+      <p><%= @list.bookmarks.count %> movies</p>
+    </div>
+    <h1 class="text-center"><%= @list.name %></h1>
+  </div>
+</div>
 
-<div id="list">
-  <ul>
-    <li>
-    <%= @list.name %>
-    <%# <%= link_to "Delete", bookmark_path(@bookmark),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %> %>
-    </li>
-    <p><%= link_to "See all lists", lists_path, class: "btn btn-flat" %></p>
-  </ul>
+<div class="container">
+  <div class="d-flex align-items-center justify-content-between">
+    <%= link_to "See all lists", lists_path, class: "btn btn-flat" %>
+    <%= link_to "Add new bookmark", new_list_bookmark_path(@list), class: "btn btn-flat" %>
+  </div>
+  <div class="cards">
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="card-bookmark">
+        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80">
+        <div class="card-bookmark-infos">
+          <div class="d-flex align-items-center justify-content-start" >
+            <h2><%= bookmark.movie.title %> • <%= bookmark.movie.rating %></h2>
+            <i class="fa-sharp fa-solid fa-star" style="color: #fdde33;"></i>
+          </div>
+
+          <div>
+            <p><%= bookmark.movie.overview %></p>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex justify-content-start">
+              <i class="fa-sharp fa-solid fa-quote-left" style="color: #000000;"></i>
+              <p><strong><%= bookmark.comment %></strong></p>
+            </div>
+            <%= link_to "Delete",
+                bookmark_path(bookmark),
+                data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+            %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -10,3 +10,9 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+// GLOBAL STYLE (ADDED MANUALLY)
+p {
+  font: $body-font;
+  font-size: small;
+}
